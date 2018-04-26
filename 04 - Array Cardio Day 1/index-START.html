@@ -31,29 +31,57 @@
 
     // Array.prototype.filter()
     // 1. Filter the list of inventors for those who were born in the 1500's
-
+    const fifteen = inventors.filter(inventor => (inventor.year >= 1500 && inventor.year < 1600))
+    console.log(fifteen)
     // Array.prototype.map()
     // 2. Give us an array of the inventors' first and last names
-
+    const names = inventors.map(inventor => `${inventor.first} ${inventor.last}`)
+    console.log(names)
     // Array.prototype.sort()
     // 3. Sort the inventors by birthdate, oldest to youngest
-
+    const sorted = inventors.sort((a, b) => a.year > b.year )
+    console.log(sorted)
     // Array.prototype.reduce()
     // 4. How many years did all the inventors live?
-
+    const lifespan = inventors.reduce((a, b) => a + (b.passed - b.year), 0)
+    console.log(lifespan)
     // 5. Sort the inventors by years lived
-
+    const sortedByYearsLived = inventors.sort((a, b) => {
+      const years = (i) => i.passed - i.year
+      return years(a) < years(b)
+    })
+    console.log(sortedByYearsLived)
     // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
     // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
+    /*
+    
+    const boulevards = Array.from(
+      document.querySelectorAll('.mw-category-group a'))
+    .map(i=>i.textContent)
+    .filter(i=> i.includes('de'))
 
+    console.log(boulevards)
 
+    */
     // 7. sort Exercise
     // Sort the people alphabetically by last name
-
+    const sortedByLastName = people.sort((a, b) => {
+      const [aLast, aFirst] = a.split(', ')
+      const [bLast, bFirst] = b.split(', ')
+      return aLast > bLast
+    })
+    console.log(sortedByLastName)
     // 8. Reduce Exercise
     // Sum up the instances of each of these
     const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck' ];
 
+    const howMany = data.reduce((o, i) => {
+      if(!o[i])
+        o[i] = 0
+      o[i]++
+      return o
+    }, {})
+    console.log(howMany)
   </script>
 </body>
 </html>
